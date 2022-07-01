@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block title %}paiement de ma commande{% endblock %}
+
+
+
+{% block body %}
+    {% set total=null %}
+    <h2>Mon recapitulatif</h2>
+    <p>Verifier vos info avant de payer: </p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+            <b>récap de ma commande</b><br/>
+            {% for product in cart %}
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="/img/{{ product.article.image }}" alt="{{ product.article.title }}" height="75px">
+                    </div>
+                    <div class="col-md-8 my-auto">
+                        {{ product.article.slug }}<br/>
+                        x {{ product.quantity }}
+                    </div>
+                    <div class="col-md-2 my-auto">{{ ((product.article.price * product.quantity)/100)|number_format(2,',','.') }}$</div>
+                </div>
+                {% set total=total +(product.article.price * product.quantity) %}
+            {% endfor %}
+
+
+            <hr>
+            <strong>Total:</strong> {{ (total/100)|number_format(2,',','.') }}$<br/>
+            <strong>Livraison:</strong> {{ (livraison.price)|number_format(2,',','.') }} $<br/>
+            <hr>
+            <strong>Total:</strong>{{((total/100)+livraison.price)|number_format(2,',','.') }} $
+
+            <form action="/commande/create-session/{{ ref }}" method="POST">
+                <button type="submit" class="btn btn-danger btn-block mt-3">payer {{((total/100)+livraison.price)|number_format(2,',','.') }} $</button>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% block title %}articles_infoteck{% endblock %}
+
+{% block body %}
+    <body>
+
+                 <!-- STORE -->
+                <div id="store" class="col-md-9">
+
+                    <br/>
+                    <br/>
+                  <div class="d-flex justify-content-end mb-2">
+                      {{ knp_pagination_sortable(articles,'sort by price','price') }}
+                  </div>
+
+                    <!-- store products -->
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            {{ form(form) }}
+
+                        </div>
+
+                        <!-- product -->
+                        <div class="col-md-9">
+
+
+                        {% for article in articles %}
+                        <div class="col-md-4 col-xs-6">
+                            <div class="product">
+                                <div class="product-img">
+                                    <img src="/img/{{ article.image }}" alt="">
+
+                                </div>
+                                <div class="product-body">
+                                    <p class="product-category">{{ article.category }}</p>
+                                    <h3 class="product-name"><a href="#">{{ article.title }}</a></h3>
+                                    <h4 class="product-price">${{ (article.price /100)|number_format(2,',')}}</h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-btns">
+                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                        <button onclick="window.location.href='{{path ('article_show',{'id':article.id}) }}'" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <a href="/panier/add/{{ article.id }}/articleall"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        </div>
+
+                        <!-- /product -->
+                    </div>
+                    <div class="navigation" >
+                        {{ knp_pagination_render(articles) }}
+                        <br/>
+                        <br/>
+                    </div>
+
+                </div>
+
+                <!-- /STORE -->
+
+            <!-- /row -->
+    </body>
+
+{% endblock %}

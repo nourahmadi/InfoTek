@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Google font -->
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Montserrat:400,500,700') }}" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/slick.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/slick-theme.css') }}"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') }}"></script>
+   {% block javascript %}{% endblock %}
+
+    <![endif]-->
+
+
+</head>
+<body>
+<!-- HEADER -->
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            <ul class="header-links pull-left">
+                <li><a href="#"><i class="fa fa-phone"></i> +021627501137</a></li>
+                <li><a href="mailto:o.gaaya50@gmail.com"><i class="fa fa-envelope-o"></i> o.gaaya50@email.com</a></li>
+                <li><a href="https://www.google.fr/maps/place/Manouba/@36.8098794,10.0426406,13z/data=!3m1!4b1!4m5!3m4!1s0x12fd326a6997b651:0xae1949b938bf5487!8m2!3d36.8093284!4d10.0863269"><i class="fa fa-map-marker"></i> Mannouba</a></li>
+            </ul>
+            <ul class="header-links pull-right">
+                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+                <li><a href="/account"><i class="fa fa-user-o"></i> My Account</a></li>
+                {%  if app.user %}
+                    <li><a href="/logout"><i class="fa fa-user-o"></i> deconnexion</a></li>
+                {% else %}
+                    <li><a href="/"><i class="fa fa-user-o"></i> connexion</a></li>  <li><a href="/register"><i class="fa fa-user-o"></i> inscription</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-lg">
+                    <div class="header-logo">
+                        <a href="/article" class="logo">
+                            <img src="{{ asset('./img/logo2.png') }}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+
+
+                <!-- ACCOUNT -->
+                <div class="col-lg ">
+                    <div class="header-ctn">
+                        <!-- Cart -->
+                        {%  if ('article' in app.request.attributes.get('_route'))or('panier' in app.request.attributes.get('_route')) %}
+                        <div class="dropdown">
+                            <a  href="/panier" class="dropdown-toggle"  aria-expanded="true">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Your Cart</span>
+                                <div class="qty"> {{ total_panier }}</div>
+                            </a>
+
+                        </div>
+                        {% endif %}
+                        <!-- /Cart -->
+
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+
+            <!-- /NAV -->
+            <div>
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
+<!-- SECTION -->
+
+<!-- FOOTER -->
+<footer id="footer">
+    <br/>
+    <br/>
+
+
+    <!-- top footer -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">About Us</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fa fa-map-marker"></i>Mannouba</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>+21627501137</a></li>
+                            <li><a href="mailto:o.gaaya50@gmail.com"><i class="fa fa-envelope-o"></i>o.gaaya50@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Categories</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Hot deals</a></li>
+                            <li><a href="#">Laptops</a></li>
+                            <li><a href="#">Smartphones</a></li>
+                            <li><a href="#">Cameras</a></li>
+                            <li><a href="#">Accessories</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clearfix visible-xs"></div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Information</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Orders and Returns</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Service</h3>
+                        <ul class="footer-links">
+                            <li><a href="/account">My Account</a></li>
+                            <li><a href="#">Track My Order</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /top footer -->
+
+    <!-- bottom footer -->
+
+    <div id="bottom-footer" class="section">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="footer-payments">
+                        <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                        <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+    <!-- /bottom footer -->
+</footer>
+<!-- /FOOTER -->
+
+<!-- jQuery Plugins -->
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/jquery.zoom.min.js') }}"></script>
+<script src="{{ asset("{{ asset('js/bootstrap.min.js') }}") }}"></script>
+<script src="{{ asset('js/slick.min.js') }}"></script>
+<script src="{{ asset('js/nouislider.min.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+
+</body>
+{% block script %}
+{% endblock %}
+</html>
+

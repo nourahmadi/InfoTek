@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}mon compte{% endblock %}
+
+{% block body %}
+    <h1>Mon compte</h1>
+
+    Bienvenue {{ app.user.firstname}} sur votre compte<br/>
+    c est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles.
+<hr>
+    <div class="row">
+        <div class="col-md-4 text-center" style="padding: 70px">
+            <i class="fa fa-key" aria-hidden="true" style="position: center"></i><br/>
+            <a href="{{ path('modif_pass') }}">Modifier mon mot de passe</a>
+
+        </div>
+        <div class="col-md-4 text-center" style="padding: 70px">
+            <i class="fa fa-address-book-o" aria-hidden="true"></i><br/>
+            <a href="{{ path('adresse') }}">Gerer mes adresses</a>
+
+        </div>
+        <div class="col-md-4 text-center" style="padding: 70px">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i><br/>
+            <a href="{{ path('article') }}">retourner a la page d acceuille</a>
+        </div>
+    </div>
+    <hr>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+
+{% endblock %}
